@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.usjt.dao;
 
 import java.sql.Connection;
@@ -40,7 +37,6 @@ public class Usuario {
     public Usuario() {
 
     }
-    
         public void inserir (){
         //1: Definir o comando SQL
         String sql = "INSERT INTO tb_login(usuario, senha) VALUES (?, ?)";
@@ -75,16 +71,19 @@ public class Usuario {
         }
         catch (Exception e){
             e.printStackTrace();
+            
         }
     }
     
     public void apagar (){
-        String sql = "DELETE FROM tb_pessoa WHERE usuario = ?";
+        String sql = "DELETE FROM tb_login WHERE usuario = ?";
         obtemConexao factory = new obtemConexao();
                 try (Connection c = factory.Conectar()){
         PreparedStatement ps = c.prepareStatement(sql);
         ps.setString(1, login);
         ps.execute();
+        JOptionPane.showMessageDialog(null, login + ", excluído com sucesso!!");
+        
         }
         catch (Exception e){
         e.printStackTrace();

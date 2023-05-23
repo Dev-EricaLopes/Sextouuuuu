@@ -132,15 +132,16 @@ public class CadastroUsu extends javax.swing.JFrame {
     private void btIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIncluirActionPerformed
         // TODO add your handling code here:
         String login, senha;
-
-        login = txtLogin.getText();
-        senha = txtSenha.getText();
-
-        Usuario lg = new Usuario();
         
-        lg.setLogin(login);
-        lg.setSenha(senha);
+
+        login = txtLogin1.getText();
+        senha = txtSenha1.getText();
         
+        System.out.println("login: " + login);
+        System.out.println("senha: " + senha);      
+        
+        Usuario lg = new Usuario(login, senha);
+  
         lg.inserir();
 
     }//GEN-LAST:event_btIncluirActionPerformed
@@ -173,8 +174,8 @@ public class CadastroUsu extends javax.swing.JFrame {
         // TODO add your handling code here:
         String login, senha;
 
-        login = txtLogin.getText();
-        senha = txtSenha.getText();
+        login = txtLogin1.getText();
+        senha = txtSenha1.getText();
 
         Usuario lg = new Usuario(login, senha);
         lg.apagar();
@@ -184,8 +185,8 @@ public class CadastroUsu extends javax.swing.JFrame {
         // TODO add your handling code here:
         String login, senha;
 
-        login = txtLogin.getText();
-        senha = txtSenha.getText();
+        login = txtLogin1.getText();
+        senha = txtSenha1.getText();
         
         Usuario lg = new Usuario(login, senha);
         lg.Consultar();

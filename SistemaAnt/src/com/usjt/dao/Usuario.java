@@ -40,7 +40,7 @@ public class Usuario {
     
         public void inserir (){
         //1: Definir o comando SQL
-        String sql = "INSERT INTO tb_login(usuario, senha) VALUES (?, ?)";
+        String sql = "INSERT INTO tb_usuario(nome, senha) VALUES (?, ?)";
         //2: Abrir uma conexão
         obtemConexao factory = new obtemConexao();
         try (Connection c = factory.Conectar()){
@@ -61,7 +61,7 @@ public class Usuario {
     }
     
     public void atualizar (){
-        String sql = "UPDATE tb_login SET senha = ? WHERE usuario = ?";
+        String sql = "UPDATE tb_usuario SET senha = ? WHERE nome = ?";
         obtemConexao factory = new obtemConexao();
         try (Connection c = factory.Conectar()){
             PreparedStatement ps = c.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class Usuario {
     }
     
     public void apagar (){
-        String sql = "DELETE FROM tb_login WHERE usuario = ?";
+        String sql = "DELETE FROM tb_usuario WHERE nome = ?";
         obtemConexao factory = new obtemConexao();
                 try (Connection c = factory.Conectar()){
         PreparedStatement ps = c.prepareStatement(sql);
@@ -93,7 +93,7 @@ public class Usuario {
     
     public boolean Entrar(Usuario usuario){
     //1: Definir o comando SQL
-    String sql = "Select * FROM tb_login WHERE usuario = ? and senha = ?";
+    String sql = "Select * FROM tb_usuario WHERE nome = ? and senha = ?";
     //2: Abrir uma conexão
     obtemConexao factory = new obtemConexao();
  

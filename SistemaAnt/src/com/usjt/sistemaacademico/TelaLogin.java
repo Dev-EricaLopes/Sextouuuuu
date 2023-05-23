@@ -37,7 +37,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
@@ -92,10 +91,6 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(txtSenha);
         txtSenha.setBounds(40, 260, 300, 30);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ericalogo.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 10, 220, 140);
 
         setSize(new java.awt.Dimension(396, 477));
         setLocationRelativeTo(null);
@@ -182,7 +177,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btLogar;
     private javax.swing.JButton btSair;
     private javax.swing.JCheckBox ckMostrarSenha;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtLogin;

@@ -5,8 +5,6 @@ import javax.swing.JOptionPane;
 
 public class conexao {
 
-    
-    
     public static void main(String[] args) {
         String nome ; 
         String fone; 

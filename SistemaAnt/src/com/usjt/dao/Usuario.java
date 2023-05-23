@@ -11,7 +11,15 @@ import javax.swing.JOptionPane;
  * @author erica
  */
 public class Usuario {
-    private String login, senha;
+    private String nome, login, senha;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getLogin() {
         return login;
@@ -29,18 +37,23 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario() {
+    }
+
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
     
-    public Usuario() {
-
+    public Usuario(String nome, String login, String senha) {
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
     }
-    
+
         public void inserir (){
         //1: Definir o comando SQL
-        String sql = "INSERT INTO tb_usuario(nome, senha) VALUES (?, ?)";
+        String sql = "INSERT INTO tb_usuario(nome, usuario, senha) VALUES (?, ?, ?)";
         //2: Abrir uma conexão
         obtemConexao factory = new obtemConexao();
         try (Connection c = factory.Conectar()){
@@ -48,8 +61,9 @@ public class Usuario {
             PreparedStatement ps = c.prepareStatement(sql);
             
             //4: Preenche os dados faltantes
-            ps.setString(1, login);
-            ps.setString(2, senha);
+            ps.setString(1, nome);
+            ps.setString(2, login);
+            ps.setString(3, senha);
             //5: Executa o comando
             ps.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!!");
@@ -61,14 +75,14 @@ public class Usuario {
     }
     
     public void atualizar (){
-        String sql = "UPDATE tb_usuario SET senha = ? WHERE nome = ?";
+        String sql = "UPDATE tb_usuario SET senha = ? WHERE usuario = ?";
         obtemConexao factory = new obtemConexao();
         try (Connection c = factory.Conectar()){
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, senha);
             ps.setString(2, login);
             ps.execute();
-            JOptionPane.showMessageDialog(null, login + "alterado com sucesso!!");
+            JOptionPane.showMessageDialog(null, nome + "alterado com sucesso!!");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -77,7 +91,7 @@ public class Usuario {
     }
     
     public void apagar (){
-        String sql = "DELETE FROM tb_usuario WHERE nome = ?";
+        String sql = "DELETE FROM tb_usuario WHERE usuario = ?";
         obtemConexao factory = new obtemConexao();
                 try (Connection c = factory.Conectar()){
         PreparedStatement ps = c.prepareStatement(sql);
@@ -93,19 +107,27 @@ public class Usuario {
     
     public boolean Entrar(Usuario usuario){
     //1: Definir o comando SQL
-    String sql = "Select * FROM tb_usuario WHERE nome = ? and senha = ?";
+        System.out.println("entrar");
+    String sql = "Select * FROM tb_usuario WHERE usuario = ? and senha = ?";
     //2: Abrir uma conexão
     obtemConexao factory = new obtemConexao();
- 
+        
         try (Connection c = factory.Conectar()){
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, login);     
             ps.setString(2, senha);
             try(
                     ResultSet rs = ps.executeQuery();
+                    
+
                 ){
                     //6. Manipular os dados obtidos
-                    return rs.next();
+                    while (rs.next())
+                    {
+                    nome = rs.getString("nome");
+                    login = rs.getString("usuario");
+                    senha = rs.getString("senha");
+                    }
                 }
         }
         catch (Exception e){
@@ -115,29 +137,28 @@ public class Usuario {
         } 
 
 
-        public String Consultar()
+        public String Consultar(String nome, String login)
         {
 
             //1: Definir o comando SQL
-            String sql = "Select * FROM tb_login WHERE usuario = ?";
+            String sql = "Select * FROM tb_usuario WHERE nome = ? or usuario = ?";
             //2: Abrir uma conexão
             obtemConexao factory = new obtemConexao();
-            JOptionPane.showMessageDialog(null, login);
 
             try (Connection c = factory.Conectar())
             {
                 PreparedStatement ps = c.prepareStatement(sql);
-                ps.setString(1, login);
+                ps.setString(1, nome);
+                ps.setString(2, login);
                 
                 ResultSet rs = ps.executeQuery();
                 //5: itera sobre o resultado
+                System.out.println(sql);
                 while (rs.next())
                 {
+                    nome = rs.getString("nome");
                     login = rs.getString("usuario");
                     senha = rs.getString("senha");
-                    
-                    JOptionPane.showMessageDialog(null, senha);
-                    return (senha);
                 }
                 
             }

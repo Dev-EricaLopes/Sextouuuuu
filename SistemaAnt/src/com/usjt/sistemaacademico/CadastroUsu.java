@@ -20,6 +20,13 @@ public class CadastroUsu extends javax.swing.JFrame {
         initComponents();
     }
 
+        public  void limparCampos()
+            
+    {
+        txtNome.setText("");
+        txtLogin1.setText("");
+        txtSenha1.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +51,9 @@ public class CadastroUsu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtSenha1 = new javax.swing.JPasswordField();
+        txtNome = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         ckMostrarSenha.setText("Mostrar senha");
         ckMostrarSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -74,16 +84,17 @@ public class CadastroUsu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btIncluir);
-        btIncluir.setBounds(30, 200, 90, 22);
+        btIncluir.setBounds(60, 370, 90, 22);
 
         btExcluir.setText("Excluir");
+        btExcluir.setEnabled(false);
         btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExcluirActionPerformed(evt);
             }
         });
         getContentPane().add(btExcluir);
-        btExcluir.setBounds(130, 200, 90, 22);
+        btExcluir.setBounds(160, 370, 90, 22);
 
         btConsultar.setText("Consultar");
         btConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,13 +103,19 @@ public class CadastroUsu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btConsultar);
-        btConsultar.setBounds(330, 200, 90, 22);
+        btConsultar.setBounds(360, 370, 90, 22);
 
         btAlterar.setText("Alterar");
+        btAlterar.setEnabled(false);
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btAlterar);
-        btAlterar.setBounds(230, 200, 90, 22);
+        btAlterar.setBounds(260, 370, 90, 22);
         getContentPane().add(txtLogin1);
-        txtLogin1.setBounds(30, 80, 390, 30);
+        txtLogin1.setBounds(60, 250, 390, 30);
 
         ckMostrarSenha1.setText("Mostrar senha");
         ckMostrarSenha1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,15 +124,15 @@ public class CadastroUsu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ckMostrarSenha1);
-        ckMostrarSenha1.setBounds(30, 170, 140, 20);
+        ckMostrarSenha1.setBounds(60, 340, 140, 20);
 
         jLabel4.setText("Usuário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 60, 100, 16);
+        jLabel4.setBounds(60, 230, 100, 16);
 
         jLabel5.setText("Senha");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 120, 150, 16);
+        jLabel5.setBounds(60, 290, 150, 16);
 
         txtSenha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,28 +140,39 @@ public class CadastroUsu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtSenha1);
-        txtSenha1.setBounds(30, 140, 390, 30);
+        txtSenha1.setBounds(60, 310, 390, 30);
+        getContentPane().add(txtNome);
+        txtNome.setBounds(60, 190, 390, 30);
 
-        setSize(new java.awt.Dimension(484, 311));
+        jLabel6.setText("Nome");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(60, 170, 100, 16);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 10, 510, 470);
+
+        setSize(new java.awt.Dimension(531, 494));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIncluirActionPerformed
         // TODO add your handling code here:
-        String login, senha;
+        String nome, login, senha;
         
 
+        nome = txtNome.getText();
         login = txtLogin1.getText();
-        senha = txtSenha1.getText();
+        senha = txtSenha1.getText();    
         
-        System.out.println("login: " + login);
-        System.out.println("senha: " + senha);      
-        
-        Usuario lg = new Usuario(login, senha);
+        Usuario lg = new Usuario(nome, login, senha);
   
         lg.inserir();
+        limparCampos();
 
     }//GEN-LAST:event_btIncluirActionPerformed
+    
 
     private void ckMostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckMostrarSenhaActionPerformed
         // TODO add your handling code here:
@@ -160,10 +188,10 @@ public class CadastroUsu extends javax.swing.JFrame {
 
     private void ckMostrarSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckMostrarSenha1ActionPerformed
         // TODO add your handling code here:
-        if(ckMostrarSenha.isSelected())
-        txtSenha.setEchoChar('\u0000');
+        if(ckMostrarSenha1.isSelected())
+        txtSenha1.setEchoChar('\u0000');
         else
-        txtSenha.setEchoChar('\u2022');
+        txtSenha1.setEchoChar('\u2022');
     }//GEN-LAST:event_ckMostrarSenha1ActionPerformed
 
     private void txtSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenha1ActionPerformed
@@ -179,21 +207,50 @@ public class CadastroUsu extends javax.swing.JFrame {
 
         Usuario lg = new Usuario(login, senha);
         lg.apagar();
+        limparCampos();
+        btExcluir.enable(false);
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
-        String login, senha;
+        String nome, login, senha;
 
         login = txtLogin1.getText();
-        senha = txtSenha1.getText();
+        nome = txtNome.getText();
         
-        Usuario lg = new Usuario(login, senha);
-        lg.Consultar();
+       
+        Usuario lg = new Usuario();
         
-        txtSenha.setText(senha);
+        lg.Consultar(nome, login);
+
+        txtNome.setText(lg.getNome());
+        txtLogin1.setText(lg.getLogin());
+        txtSenha1.setText(lg.getSenha());
+        
+                
+        btAlterar.enable(true);
+        btExcluir.enable(true);
+        
+        
         
     }//GEN-LAST:event_btConsultarActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        // TODO add your handling code here:
+        String nome, login, senha;
+        
+
+        nome = txtNome.getText();
+        login = txtLogin1.getText();
+        senha = txtSenha1.getText();    
+        
+        Usuario lg = new Usuario(nome, login, senha);
+  
+        lg.atualizar();
+        limparCampos();
+        btAlterar.enable(false);
+
+    }//GEN-LAST:event_btAlterarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,13 +260,19 @@ public class CadastroUsu extends javax.swing.JFrame {
     private javax.swing.JButton btIncluir;
     private javax.swing.JCheckBox ckMostrarSenha;
     private javax.swing.JCheckBox ckMostrarSenha1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtLogin1;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JPasswordField txtSenha1;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

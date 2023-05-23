@@ -111,16 +111,17 @@ public class TelaLogin extends javax.swing.JFrame {
         System.out.println(senha);
         
         Usuario lg = new Usuario(login, senha);
-        
-        if(lg.Entrar(lg))
+        lg.Entrar(lg);
+   
+        if(lg.getLogin().equals(login) && lg.getSenha().equals(senha) )
         {
-            JOptionPane.showMessageDialog(null, "Seja bem vindo, " + login);
+            JOptionPane.showMessageDialog(null, "Seja bem vindo(a), " + lg.getNome());
             TelaInicial menu = new TelaInicial();
             menu.setVisible(true);
             dispose();
         }
         else
-           JOptionPane.showMessageDialog(null, "ERRO. Senha Inválida!");
+           JOptionPane.showMessageDialog(null, "ERRO. Senha e/ou Usuário Inválido!");
 
     }//GEN-LAST:event_btLogarActionPerformed
 
